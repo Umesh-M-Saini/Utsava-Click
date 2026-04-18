@@ -125,7 +125,10 @@ exports.approveBooking = async (req, res) => {
         await booking.save();
 
         // Send Approval Email to User
-        await sendApprovalToUser(booking);
+        const emailResult = await sendApprovalToUser(booking);
+        if (!emailResult.success) {
+            console.error('⚠️ Approval email failed:', emailResult.error);
+        }
 
         // Create notification for user
         const notification = new Notification({            userId: booking.userId,
@@ -160,7 +163,10 @@ exports.rejectBooking = async (req, res) => {
         await booking.save();
 
         // Send Rejection Email to User
-        await sendRejectionToUser(booking);
+        const emailResult = await sendRejectionToUser(booking);
+        if (!emailResult.success) {
+            console.error('⚠️ Rejection email failed:', emailResult.error);
+        }
 
         // Create notification for user
         const notification = new Notification({

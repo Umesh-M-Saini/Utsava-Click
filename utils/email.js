@@ -84,61 +84,110 @@ const sendBookingToOwner = async (booking) => {
  */
 const sendApprovalToUser = async (booking) => {
     try {
+        console.log('--- DEBUG: Preparing Approval Email for User ---', {
+            name: booking.name,
+            email: booking.email,
+            package: booking.packageName
+        });
+
+        if (!process.env.SENDGRID_API_KEY || !process.env.EMAIL_FROM) {
+            console.error('❌ SendGrid configuration missing');
+            return { success: false, error: 'SendGrid not configured' };
+        }
+
         const msg = {
             to: booking.email,
-
-            // ✅ FIXED
             from: {
                 email: process.env.EMAIL_FROM,
                 name: "Utsava Click"
             },
-
-            subject: 'Booking Approved 🎉',
-
+            subject: `Booking Approved! 🎉 - ${booking.packageName || 'Custom Package'}`,
             html: `
-                <h2>Booking Approved</h2>
-                <p>Hi ${booking.name},</p>
-                <p>Your booking has been approved.</p>
+                <div style="font-family: Arial; max-width:600px; margin:auto; border:1px solid #28a745; border-radius:10px;">
+                    <div style="background:#28a745; color:white; padding:20px; text-align:center; border-radius:9px 9px 0 0;">
+                        <h2>Booking Approved!</h2>
+                    </div>
+                    <div style="padding:20px; color: #333;">
+                        <p>Hi <strong>${booking.name}</strong>,</p>
+                        <p>We are excited to inform you that your booking request for <strong>${booking.packageName || 'Custom Package'}</strong> has been <strong>Approved</strong>! ✅</p>
+                        
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                            <p style="margin: 5px 0;"><strong>Package:</strong> ${booking.packageName || 'Custom'}</p>
+                            <p style="margin: 5px 0;"><strong>Date:</strong> ${new Date(booking.startDate).toLocaleDateString()} to ${new Date(booking.endDate).toLocaleDateString()}</p>
+                            <p style="margin: 5px 0;"><strong>Location:</strong> ${booking.place}</p>
+                            <p style="margin: 5px 0;"><strong>Total Price:</strong> ₹${booking.totalPrice.toLocaleString('en-IN')}</p>
+                        </div>
+
+                        <p>Our team will contact you shortly to discuss further details and coordination.</p>
+                        <p>Thank you for choosing <strong>Utsava Click</strong>!</p>
+                    </div>
+                    <div style="background:#f1f1f1; padding:10px; text-align:center; font-size:12px; color:#666; border-radius:0 0 9px 9px;">
+                        &copy; ${new Date().getFullYear()} Utsava Click. All rights reserved.
+                    </div>
+                </div>
             `
         };
 
-        await sgMail.send(msg);
+        const response = await sgMail.send(msg);
         console.log(`✅ Approval email sent to ${booking.email}`);
+        return { success: true, messageId: response[0]?.headers['x-message-id'] };
 
     } catch (error) {
-        console.error('❌ FULL ERROR:', error.response?.body || error);
+        console.error('❌ Approval Email Error:', error.response?.body || error);
+        return { success: false, error: error.message };
     }
 };
-
 
 /**
  * Send Rejection Email to User
  */
 const sendRejectionToUser = async (booking) => {
     try {
+        console.log('--- DEBUG: Preparing Rejection Email for User ---', {
+            name: booking.name,
+            email: booking.email
+        });
+
+        if (!process.env.SENDGRID_API_KEY || !process.env.EMAIL_FROM) {
+            console.error('❌ SendGrid configuration missing');
+            return { success: false, error: 'SendGrid not configured' };
+        }
+
         const msg = {
             to: booking.email,
-
-            // ✅ FIXED
             from: {
                 email: process.env.EMAIL_FROM,
                 name: "Utsava Click"
             },
-
-            subject: 'Booking Rejected',
-
+            subject: `Update on your Booking Request - Utsava Click`,
             html: `
-                <h2>Booking Rejected</h2>
-                <p>Hi ${booking.name},</p>
-                <p>Your booking was not accepted.</p>
+                <div style="font-family: Arial; max-width:600px; margin:auto; border:1px solid #dc3545; border-radius:10px;">
+                    <div style="background:#dc3545; color:white; padding:20px; text-align:center; border-radius:9px 9px 0 0;">
+                        <h2>Booking Update</h2>
+                    </div>
+                    <div style="padding:20px; color: #333;">
+                        <p>Hi <strong>${booking.name}</strong>,</p>
+                        <p>Thank you for your interest in <strong>Utsava Click</strong>.</p>
+                        <p>Regrettably, we are unable to accept your booking request for <strong>${booking.packageName || 'Custom Package'}</strong> at this time. ❌</p>
+                        <p>This could be due to scheduling conflicts or unavailability on the requested dates.</p>
+                        <p>Feel free to reach out to us for other dates or any questions.</p>
+                        <br>
+                        <p>Best regards,<br><strong>Utsava Click Team</strong></p>
+                    </div>
+                    <div style="background:#f1f1f1; padding:10px; text-align:center; font-size:12px; color:#666; border-radius:0 0 9px 9px;">
+                        &copy; ${new Date().getFullYear()} Utsava Click. All rights reserved.
+                    </div>
+                </div>
             `
         };
 
-        await sgMail.send(msg);
-        console.log(`❌ Rejection email sent to ${booking.email}`);
+        const response = await sgMail.send(msg);
+        console.log(`✅ Rejection email sent to ${booking.email}`);
+        return { success: true, messageId: response[0]?.headers['x-message-id'] };
 
     } catch (error) {
-        console.error('❌ FULL ERROR:', error.response?.body || error);
+        console.error('❌ Rejection Email Error:', error.response?.body || error);
+        return { success: false, error: error.message };
     }
 };
 
