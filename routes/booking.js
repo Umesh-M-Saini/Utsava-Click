@@ -32,18 +32,11 @@ router.post('/booking', isLoggedIn, bookingController.postBooking);
 /**
  * Approve Booking
  */
-router.get('/booking/approve/:id', bookingController.approveBooking);
+const approveLink = `${BASE_URL}/booking/approve/${booking._id}`;
+const rejectLink = `${BASE_URL}/booking/reject/${booking._id}`;
 
-/**
- * Reject Booking
- */
-router.get('/booking/reject/:id', bookingController.rejectBooking);
-
-/**
- * =========================
- * NOTIFICATIONS
- * =========================
- */
+console.log("🚀 APPROVE LINK:", approveLink);
+console.log("🚀 REJECT LINK:", rejectLink);
 
 /**
  * Mark notification as read
