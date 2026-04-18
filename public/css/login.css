@@ -127,12 +127,19 @@ body, html {
     padding: 0 !important;
     cursor: pointer;
     transition: all 0.3s ease;
+<<<<<<< HEAD
+=======
+    font-size: 1rem;
+    color: var(--gold) !important;
+    opacity: 1;
+>>>>>>> 3ccbebd1 ( add hero secrion video from cloudnary)
 }
 
 .toggle-password:hover {
     background: rgba(255, 215, 0, 0.3) !important;
     border-color: var(--gold) !important;
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+<<<<<<< HEAD
 }
 
 .toggle-password i {
@@ -144,6 +151,9 @@ body, html {
 
 .toggle-password:hover i {
     transform: scale(1.1);
+=======
+    transform: translateY(-50%) scale(1.1);
+>>>>>>> 3ccbebd1 ( add hero secrion video from cloudnary)
     color: #ffffff !important;
 }
 

@@ -1,7 +1,11 @@
 /* public/css/package1.css */
 
 .package-details-page {
+<<<<<<< HEAD
     background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), var(--cloudinary-base-url-back-img, url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/back-img.jpg'));
+=======
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/images/back-img.jpg');
+>>>>>>> 3ccbebd1 ( add hero secrion video from cloudnary)
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
