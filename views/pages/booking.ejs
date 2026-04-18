@@ -23,6 +23,12 @@
     <!-- Include Alerts Partial -->
     <%- include('../partials/alerts') %>
 
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="https://res.cloudinary.com/daguonusm/video/upload/v1776531608/13782960_1920_1080_50fps_zm6hyi.mp4" type="video/mp4">
+        </video>
+    </div>
+
     <div id="booking-system" class="booking-page">
         <% 
             // Safe fallback handling for preFilled (only package, services, price allowed)

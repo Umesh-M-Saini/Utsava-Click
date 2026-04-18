@@ -11,16 +11,46 @@
 
 .booking-page {
     padding: 140px 0 80px;
-<<<<<<< HEAD
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), var(--cloudinary-base-url-home-img7, url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/home-img7.jpg'));
-=======
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/images/home-img7.jpg');
->>>>>>> 3ccbebd1 ( add hero secrion video from cloudnary)
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: transparent;
     min-height: 100vh;
     color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+/* Video Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* Overlay to darken video */
+.video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Darken for readability */
+    pointer-events: none;
 }
 
 .glass-effect {

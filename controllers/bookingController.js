@@ -112,40 +112,42 @@ exports.postBooking = async (req, res) => {
  */
 exports.approveBooking = async (req, res) => {
     try {
-        const booking = await Booking.findById(req.params.id);
+        const bookingId = req.params.id;
+
+        const booking = await Booking.findById(bookingId);
+
         if (!booking) {
-            return res.status(404).send('Booking not found');
+            req.flash('error_msg', 'Booking not found ❌');
+            return res.redirect('/');
         }
 
         if (booking.status !== 'pending') {
-            return res.send('This booking has already been processed.');
+            req.flash('error_msg', 'Already processed ❌');
+            return res.redirect('/');
         }
 
+        // Update status
         booking.status = 'approved';
         await booking.save();
 
-        // Send Approval Email to User
-        const emailResult = await sendApprovalToUser(booking);
-        if (!emailResult.success) {
-            console.error('⚠️ Approval email failed:', emailResult.error);
-        }
+        // Send email to user
+        await sendApprovalToUser(booking);
 
-        // Create notification for user
-        const notification = new Notification({
+        // Create notification
+        await Notification.create({
             userId: booking.userId,
             message: `Your booking for ${booking.packageName || 'Custom Package'} has been approved! ✅`,
             type: 'success',
             isRead: false
         });
-        await notification.save();
 
-        console.log('✅ Notification created for user:', booking.userId);
+        req.flash('success_msg', 'Booking Approved Successfully! 🎉');
+        return res.redirect('/');
 
-        req.flash('success_msg', 'Booking Approved Successfully! ✅');
-        res.redirect('/');
     } catch (error) {
-        console.error('Approve Booking Error:', error);
-        res.status(500).send('Internal Server Error');
+        console.error('Approve Error:', error);
+        req.flash('error_msg', 'Something went wrong ❌');
+        return res.redirect('/');
     }
 };
 
@@ -155,40 +157,42 @@ exports.approveBooking = async (req, res) => {
  */
 exports.rejectBooking = async (req, res) => {
     try {
-        const booking = await Booking.findById(req.params.id);
+        const bookingId = req.params.id;
+
+        const booking = await Booking.findById(bookingId);
+
         if (!booking) {
-            return res.status(404).send('Booking not found');
+            req.flash('error_msg', 'Booking not found ❌');
+            return res.redirect('/');
         }
 
         if (booking.status !== 'pending') {
-            return res.send('This booking has already been processed.');
+            req.flash('error_msg', 'Already processed ❌');
+            return res.redirect('/');
         }
 
+        // Update status
         booking.status = 'rejected';
         await booking.save();
 
-        // Send Rejection Email to User
-        const emailResult = await sendRejectionToUser(booking);
-        if (!emailResult.success) {
-            console.error('⚠️ Rejection email failed:', emailResult.error);
-        }
+        // Send email to user
+        await sendRejectionToUser(booking);
 
-        // Create notification for user
-        const notification = new Notification({
+        // Create notification
+        await Notification.create({
             userId: booking.userId,
             message: `Your booking for ${booking.packageName || 'Custom Package'} has been rejected. ❌`,
             type: 'warning',
             isRead: false
         });
-        await notification.save();
 
-        console.log('❌ Rejection notification created for user:', booking.userId);
+        req.flash('success_msg', 'Booking Rejected ❌');
+        return res.redirect('/');
 
-        req.flash('success_msg', 'Booking Rejected! ❌');
-        res.redirect('/');
     } catch (error) {
-        console.error('Reject Booking Error:', error);
-        res.status(500).send('Internal Server Error');
+        console.error('Reject Error:', error);
+        req.flash('error_msg', 'Something went wrong ❌');
+        return res.redirect('/');
     }
 };
 

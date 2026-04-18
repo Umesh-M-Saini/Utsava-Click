@@ -36,7 +36,7 @@ module.exports = [
     'HIM_8717~2.JPG',
     'home-img1.jpg',
     'home-img2.jpg',
-    'home-img3.jpg',
+    'home-img1_ekvjub.jpg',
     'home-img4.jpg',
     'home-img5.jpg',
     'home-img6.jpg',
