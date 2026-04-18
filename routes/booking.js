@@ -1,54 +1,68 @@
 const express = require('express');
 const router = express.Router();
+
 const bookingController = require('../controllers/bookingController');
 const { isLoggedIn } = require('../middleware/auth');
 
 /**
- * @route   GET /booking
- * @desc    Show booking page
- * @access  Private
+ * =========================
+ * BOOKING ROUTES
+ * =========================
+ */
+
+/**
+ * GET /booking
+ * Show booking page
  */
 router.get('/booking', isLoggedIn, bookingController.getBookingPage);
 
 /**
- * @route   POST /booking
- * @desc    Handle booking submission
- * @access  Private
+ * POST /booking
+ * Submit booking
  */
 router.post('/booking', isLoggedIn, bookingController.postBooking);
 
 /**
- * @route   GET /booking/approve/:id
- * @desc    Approve booking
- * @access  Public (from email)
+ * =========================
+ * APPROVE / REJECT (EMAIL LINKS)
+ * NO LOGIN REQUIRED
+ * =========================
+ */
+
+/**
+ * Approve Booking
  */
 router.get('/booking/approve/:id', bookingController.approveBooking);
 
 /**
- * @route   GET /booking/reject/:id
- * @desc    Reject booking
- * @access  Public (from email)
+ * Reject Booking
  */
 router.get('/booking/reject/:id', bookingController.rejectBooking);
 
 /**
- * @route   POST /notifications/read/:id
- * @desc    Mark notification as read
- * @access  Private
+ * =========================
+ * NOTIFICATIONS
+ * =========================
+ */
+
+/**
+ * Mark notification as read
  */
 router.post('/notifications/read/:id', isLoggedIn, bookingController.markNotificationRead);
 
 /**
- * @route   GET /custom-package
- * @desc    Show custom package booking page
- * @access  Public
+ * =========================
+ * CUSTOM PACKAGE
+ * =========================
+ */
+
+/**
+ * GET custom package page
  */
 router.get('/custom-package', bookingController.getCustomPackagePage);
 
 /**
- * @route   POST /custom-package
- * @desc    Handle custom package request submission
- * @access  Public
+ * POST custom package request
  */
 router.post('/custom-package', bookingController.postCustomPackageRequest);
 

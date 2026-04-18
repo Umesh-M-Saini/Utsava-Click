@@ -114,40 +114,38 @@ exports.approveBooking = async (req, res) => {
     try {
         const bookingId = req.params.id;
 
+        // ✅ VALIDATION FIX (VERY IMPORTANT)
+        if (!bookingId || bookingId.length < 10) {
+            return res.status(400).send("Invalid booking ID ❌");
+        }
+
         const booking = await Booking.findById(bookingId);
 
         if (!booking) {
-            req.flash('error_msg', 'Booking not found ❌');
-            return res.redirect('/');
+            return res.status(404).send("Booking not found ❌");
         }
 
-        if (booking.status !== 'pending') {
-            req.flash('error_msg', 'Already processed ❌');
-            return res.redirect('/');
+        if (booking.status !== "pending") {
+            return res.send("Already processed ❌");
         }
 
-        // Update status
-        booking.status = 'approved';
+        booking.status = "approved";
         await booking.save();
 
-        // Send email to user
         await sendApprovalToUser(booking);
 
-        // Create notification
         await Notification.create({
             userId: booking.userId,
-            message: `Your booking for ${booking.packageName || 'Custom Package'} has been approved! ✅`,
-            type: 'success',
+            message: `Your booking for ${booking.packageName} is approved ✅`,
+            type: "success",
             isRead: false
         });
 
-        req.flash('success_msg', 'Booking Approved Successfully! 🎉');
-        return res.redirect('/');
+        return res.send("<h2 style='color:green'>Booking Approved ✅</h2>");
 
     } catch (error) {
-        console.error('Approve Error:', error);
-        req.flash('error_msg', 'Something went wrong ❌');
-        return res.redirect('/');
+        console.error("Approve Error:", error);
+        return res.status(500).send("Server Error ❌");
     }
 };
 
@@ -159,40 +157,38 @@ exports.rejectBooking = async (req, res) => {
     try {
         const bookingId = req.params.id;
 
+        // ✅ VALIDATION FIX
+        if (!bookingId || bookingId.length < 10) {
+            return res.status(400).send("Invalid booking ID ❌");
+        }
+
         const booking = await Booking.findById(bookingId);
 
         if (!booking) {
-            req.flash('error_msg', 'Booking not found ❌');
-            return res.redirect('/');
+            return res.status(404).send("Booking not found ❌");
         }
 
-        if (booking.status !== 'pending') {
-            req.flash('error_msg', 'Already processed ❌');
-            return res.redirect('/');
+        if (booking.status !== "pending") {
+            return res.send("Already processed ❌");
         }
 
-        // Update status
-        booking.status = 'rejected';
+        booking.status = "rejected";
         await booking.save();
 
-        // Send email to user
         await sendRejectionToUser(booking);
 
-        // Create notification
         await Notification.create({
             userId: booking.userId,
-            message: `Your booking for ${booking.packageName || 'Custom Package'} has been rejected. ❌`,
-            type: 'warning',
+            message: `Your booking for ${booking.packageName} is rejected ❌`,
+            type: "warning",
             isRead: false
         });
 
-        req.flash('success_msg', 'Booking Rejected ❌');
-        return res.redirect('/');
+        return res.send("<h2 style='color:red'>Booking Rejected ❌</h2>");
 
     } catch (error) {
-        console.error('Reject Error:', error);
-        req.flash('error_msg', 'Something went wrong ❌');
-        return res.redirect('/');
+        console.error("Reject Error:", error);
+        return res.status(500).send("Server Error ❌");
     }
 };
 

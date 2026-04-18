@@ -10,12 +10,13 @@
 }
 
 .booking-page {
-    padding: 140px 0 80px;
+    padding: 140px 0 100px;
     background: transparent;
     min-height: 100vh;
     color: var(--white);
     position: relative;
     z-index: 1;
+    margin-bottom: 50px;
 }
 
 /* Video Background */
