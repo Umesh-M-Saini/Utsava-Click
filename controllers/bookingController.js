@@ -131,11 +131,15 @@ exports.approveBooking = async (req, res) => {
         }
 
         // Create notification for user
-        const notification = new Notification({            userId: booking.userId,
+        const notification = new Notification({
+            userId: booking.userId,
             message: `Your booking for ${booking.packageName || 'Custom Package'} has been approved! ✅`,
-            type: 'success'
+            type: 'success',
+            isRead: false
         });
         await notification.save();
+
+        console.log('✅ Notification created for user:', booking.userId);
 
         res.send('<h2>Booking Approved Successfully! ✅</h2><p>A notification has been sent to the user.</p><a href="/">Go to Home</a>');
     } catch (error) {
@@ -172,9 +176,12 @@ exports.rejectBooking = async (req, res) => {
         const notification = new Notification({
             userId: booking.userId,
             message: `Your booking for ${booking.packageName || 'Custom Package'} has been rejected. ❌`,
-            type: 'warning'
+            type: 'warning',
+            isRead: false
         });
         await notification.save();
+
+        console.log('❌ Rejection notification created for user:', booking.userId);
 
         res.send('<h2>Booking Rejected! ❌</h2><p>A notification has been sent to the user.</p><a href="/">Go to Home</a>');
     } catch (error) {

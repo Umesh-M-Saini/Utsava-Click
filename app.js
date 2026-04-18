@@ -72,7 +72,9 @@ app.use(async (req, res, next) => {
     // Notifications & unread count
     if (req.session.user) {
         try {
-            const notifications = await Notification.find({ userId: req.session.user.id }).limit(5);
+            const notifications = await Notification.find({ userId: req.session.user.id })
+                .sort({ createdAt: -1 })
+                .limit(5);
             res.locals.notifications = notifications;
             
             // ✅ Count unread notifications
