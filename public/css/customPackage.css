@@ -12,11 +12,7 @@
 
 #custom-package-builder {
     padding: 120px 0 80px;
-<<<<<<< HEAD
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), var(--cloudinary-base-url-home-img6, url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/home-img6.jpg'));
-=======
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/home-img6.jpg');
->>>>>>> 3ccbebd1 ( add hero secrion video from cloudnary)
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://res.cloudinary.com/daguonusm/image/upload/v1776509714/back-img_jyz9qr.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

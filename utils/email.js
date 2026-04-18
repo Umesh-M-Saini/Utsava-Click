@@ -20,9 +20,12 @@ const sendBookingToOwner = async (booking) => {
         }
 
         const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+        
+        // Ensure BASE_URL doesn't end with a slash for consistency
+        const cleanBaseUrl = BASE_URL.endsWith('/') ? BASE_URL.slice(0, -1) : BASE_URL;
 
-        const approveLink = `${BASE_URL}/booking/approve/${booking._id}`;
-        const rejectLink = `${BASE_URL}/booking/reject/${booking._id}`;
+        const approveLink = `${cleanBaseUrl}/booking/approve/${booking._id}`;
+        const rejectLink = `${cleanBaseUrl}/booking/reject/${booking._id}`;
 
         const servicesList = Array.isArray(booking.services) && booking.services.length > 0
             ? booking.services.join(', ')

@@ -141,7 +141,8 @@ exports.approveBooking = async (req, res) => {
 
         console.log('✅ Notification created for user:', booking.userId);
 
-        res.send('<h2>Booking Approved Successfully! ✅</h2><p>A notification has been sent to the user.</p><a href="/">Go to Home</a>');
+        req.flash('success_msg', 'Booking Approved Successfully! ✅');
+        res.redirect('/');
     } catch (error) {
         console.error('Approve Booking Error:', error);
         res.status(500).send('Internal Server Error');
@@ -183,7 +184,8 @@ exports.rejectBooking = async (req, res) => {
 
         console.log('❌ Rejection notification created for user:', booking.userId);
 
-        res.send('<h2>Booking Rejected! ❌</h2><p>A notification has been sent to the user.</p><a href="/">Go to Home</a>');
+        req.flash('success_msg', 'Booking Rejected! ❌');
+        res.redirect('/');
     } catch (error) {
         console.error('Reject Booking Error:', error);
         res.status(500).send('Internal Server Error');
