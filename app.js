@@ -54,7 +54,7 @@ app.use(async (req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.user = req.session.user || null;
-    res.locals.cloudinaryBaseUrl = "https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/"; // Placeholder Cloud Name
+    res.locals.cloudinaryBaseUrl = process.env.CLOUDINARY_URL || "https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/"; 
 
     // ✅ Default values for templates
     res.locals.unreadCount = 0;

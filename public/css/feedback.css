@@ -10,7 +10,7 @@
 
 #feedback-page {
     padding: 120px 0 80px;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/home-img5.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), var(--cloudinary-base-url-home-img5, url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/home-img5.jpg'));
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

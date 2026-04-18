@@ -19,6 +19,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Removed problematic generic form interceptor to avoid blocking booking/login flows
 
+    // Fallback for broken images
+    const handleImageError = (img) => {
+        console.warn(`Image failed to load: ${img.src}`);
+        img.onerror = null; // Prevent infinite loop
+        img.src = 'https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/placeholder.jpg'; // Default placeholder
+        img.classList.add('img-placeholder');
+    };
+
+    document.querySelectorAll('img').forEach(img => {
+        if (img.complete) {
+            if (img.naturalWidth === 0) handleImageError(img);
+        } else {
+            img.addEventListener('error', () => handleImageError(img));
+        }
+    });
+
     // Horizontal Scrolling Gallery Infinite Loop Logic
     const galleryTrack = document.getElementById('galleryTrack');
     if (galleryTrack) {

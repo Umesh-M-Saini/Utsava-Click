@@ -232,7 +232,7 @@ body {
 
 /* Custom Package Page Styles */
 .custom-package-page {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/back-img.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), var(--cloudinary-base-url-back-img, url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/back-img.jpg'));
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -694,7 +694,7 @@ body {
 .banner-wrapper {
     position: relative;
     height: 400px;
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/back-img.jpg');
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), var(--cloudinary-base-url-back-img, url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/back-img.jpg'));
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Parallax effect */

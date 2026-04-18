@@ -12,7 +12,7 @@
 
 #custom-package-builder {
     padding: 120px 0 80px;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/home-img6.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), var(--cloudinary-base-url-home-img6, url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/home-img6.jpg'));
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
