@@ -1,0 +1,223 @@
+:root {
+    --gold: #FFD700; /* More vibrant gold for better visibility on lighter background */
+    --black: #000000;
+    --white: #ffffff;
+    --glass: rgba(0, 0, 0, 0.6); /* Slightly more transparent */
+    --border: rgba(255, 215, 0, 0.4);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: var(--black);
+}
+
+.cinzel-font {
+    font-family: 'Cinzel', serif;
+}
+
+.poppins-font {
+    font-family: 'Poppins', sans-serif;
+}
+
+.text-gold {
+    color: var(--gold);
+}
+
+.border-gold {
+    border-color: var(--gold) !important;
+}
+
+/* Video Background */
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* Overlay to darken video */
+.video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Reduced from 0.6 to 0.4 for more visibility */
+    pointer-events: none;
+}
+
+/* Signup Card */
+.signup-card {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.brand-logo h1 {
+    color: var(--gold);
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.input-group-text {
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+}
+
+.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+    border-color: var(--gold);
+    color: var(--white);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.input-group-text {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--border);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+}
+
+.toggle-password {
+    position: absolute !important;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 35px;
+    width: 35px;
+    z-index: 10;
+    background: rgba(255, 215, 0, 0.15) !important;
+    border: 1px solid rgba(255, 215, 0, 0.4) !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-password:hover {
+    background: rgba(255, 215, 0, 0.3) !important;
+    border-color: var(--gold) !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.toggle-password i {
+    font-size: 1rem;
+    color: var(--gold) !important;
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+
+.toggle-password:hover i {
+    transform: scale(1.1);
+    color: #ffffff !important;
+}
+
+/* Remove circular background effect to keep it minimal */
+.toggle-password::before {
+    display: none;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.input-group-text {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--border);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-group .form-control {
+    border-left: 0 !important;
+    border-right: 1px solid var(--gold) !important;
+    border-radius: 0 10px 10px 0 !important;
+    padding-right: 45px !important; /* Prevent text from overlapping icon */
+}
+
+.input-group-text svg {
+    width: 18px;
+    height: 18px;
+    fill: rgba(255, 255, 255, 0.7) !important;
+}
+
+.btn-gold {
+    background-color: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 12px;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+    background-color: #b8962d;
+    transform: scale(1.02);
+    color: var(--black);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .signup-card {
+        margin: 20px;
+        padding: 30px !important;
+    }
+}
+
+/* Ensure content overlays video */
+.signup-container {
+    position: relative;
+    z-index: 1;
+}

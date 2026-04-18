@@ -1,0 +1,118 @@
+/* public/css/feedback.css */
+
+:root {
+    --gold: #d4af37;
+    --dark-gold: #b8860b;
+    --white: #ffffff;
+    --black: #111111;
+    --soft-white: #f8f9fa;
+}
+
+#feedback-page {
+    padding: 120px 0 80px;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/home-img5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.feedback-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    color: var(--white);
+}
+
+.feedback-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-label {
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border-radius: 10px;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    color: var(--white);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form-select option {
+    background: #222;
+    color: var(--white);
+}
+
+/* Star Rating System */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2.5rem;
+    color: #444;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+    color: var(--gold);
+}
+
+.btn-submit-feedback {
+    background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+    color: var(--black);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-submit-feedback:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
+}
+
+@media (max-width: 576px) {
+    .feedback-container {
+        padding: 25px;
+    }
+}

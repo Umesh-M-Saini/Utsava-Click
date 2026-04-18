@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utsava Click | Capturing Best Moments</title>
+    <!-- Google Fonts: Cinzel, Playfair Display, Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/footer.css">
+</head>
+<body>
+
+    <!-- Include Navbar Partial -->
+    <%- include('../partials/nav') %>
+
+    <!-- Include Alerts Partial -->
+    <%- include('../partials/alerts') %>
+
+    <!-- Hero Section with Background Video -->
+    <header class="hero-container">
+        <!-- Background Video -->
+        <video autoplay muted loop playsinline id="hero-video">
+            <source src="<%= cloudinaryBaseUrl %>HeroSectionVideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Dark Overlay -->
+        <div class="hero-overlay"></div>
+
+        <!-- Hero Content (Centered) -->
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="display-1 fw-bold">Utsava Click</h1>
+                <p class="lead">Capturing Best Moments, Creating Good Memories</p>
+                <div class="mt-4">
+                    <a href="/booking" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold" style="background-color: #ffcc00; border-color: #ffcc00;">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Horizontal Scrolling Gallery Section -->
+    <section class="horizontal-gallery-section">
+        <div class="container-fluid px-0">
+            <!-- Section Heading -->
+            <div class="text-center mb-5">
+                <h2 class="gallery-heading">Our Previous Work</h2>
+                <div class="heading-underline"></div>
+            </div>
+
+            <!-- Scrolling Gallery Container -->
+            <div class="gallery-scroll-container">
+                <div class="gallery-track" id="galleryTrack">
+                    <!-- Images from Cloudinary (gallarysection) -->
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/1000124608~2.jpg" alt="Work 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/1000124612~2.jpg" alt="Work 2">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/1000125655~2.jpg" alt="Work 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/ASN_7502~2.jpg" alt="Work 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/HIM_1742~2.jpg" alt="Work 5">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/HIM_1743~2.JPG" alt="Work 6">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/HIM_3597~2.JPG" alt="Work 7">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/home-img5.jpg" alt="Work 8">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/home-img6.jpg" alt="Work 9">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="<%= cloudinaryBaseUrl %>gallarysection/home-img7.jpg" alt="Work 10">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Show More Button -->
+            <div class="text-center mt-5">
+                <a href="/gallery" class="btn-show-more">Show More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages-section py-5">
+        <div class="container py-5">
+            <!-- New Package Heading -->
+            <div class="text-center mb-5">
+                <h2 class="gallery-heading">Our Photography Packages</h2>
+                <div class="heading-underline"></div>
+                <p class="mt-3 text-gold" style="color: var(--gold); font-family: 'Poppins', sans-serif; letter-spacing: 1px;">Choose the perfect package for your special moments</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <!-- First Package -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="package-card h-100">
+                        <h2 class="package-title">First Package</h2>
+                        <div class="package-price">₹ 51,000</div>
+                        <ul class="package-features">
+                            <li><i class="bi bi-calendar3"></i> 3 Days of Wedding Coverage</li>
+                            <li><i class="bi bi-camera"></i> Traditional Photography & Videography</li>
+                            <li><i class="bi bi-camera-reels"></i> 2 Reels and Posts</li>
+                            <li><i class="bi bi-book"></i> 30-Page Album</li>
+                            <li><i class="bi bi-film"></i> 3 Hours Edited Video</li>
+                        </ul>
+                        <div class="text-center mt-auto d-flex flex-column gap-2">
+                            <a href="/package1" class="btn-package">SHOW MORE</a>
+                            <a href="/booking?package=First Package&price=51000&services=Traditional Photo,Traditional Video,2 Reels,30-page Album,3-hour wedding videos" class="btn btn-warning rounded-pill fw-bold">BOOK NOW</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Package -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="package-card h-100">
+                        <h2 class="package-title">Second Package</h2>
+                        <div class="package-price">₹ 75,000</div>
+                        <ul class="package-features">
+                            <li><i class="bi bi-camera"></i> 1 Day Pre-wedding Photoshoot</li>
+                            <li><i class="bi bi-person-plus"></i> 1 Day Candid Photography</li>
+                            <li><i class="bi bi-camera-reels"></i> 2 Reels and Posts</li>
+                            <li><i class="bi bi-star"></i> Wedding Highlights</li>
+                        </ul>
+                        <div class="text-center mt-auto d-flex flex-column gap-2">
+                            <a href="/package2" class="btn-package">SHOW MORE</a>
+                            <a href="/booking?package=Second Package&price=75000&services=7 days Pre-Wedding,3 days Wedding,Traditional Photo,Traditional Video,2 Reels,30-page Album,5-hour wedding videos" class="btn btn-warning rounded-pill fw-bold">BOOK NOW</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Package (Best Value) -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="package-card h-100 best-value">
+                        <div class="best-value-badge">BEST VALUE</div>
+                        <h2 class="package-title">Third Package</h2>
+                        <div class="package-price">₹ 1,49,000</div>
+                        <ul class="package-features">
+                            <li><i class="bi bi-music-note-beamed"></i> Pre-wedding Song Teaser</li>
+                            <li><i class="bi bi-calendar3"></i> 7 Days Wedding Photoshoot</li>
+                            <li><i class="bi bi-camera-video"></i> Candid + Cinematography (only wedding day)</li>
+                            <li><i class="bi bi-book"></i> Two 30-page Albums</li>
+                            <li><i class="bi bi-film"></i> All Wedding Videos Edited</li>
+                            <li><i class="bi bi-lightning-charge"></i> Reels and Posts</li>
+                        </ul>
+                        <div class="text-center mt-auto d-flex flex-column gap-2">
+                            <a href="/package3" class="btn-package">SHOW MORE</a>
+                            <a href="/booking?package=Third Package&price=149000&services=Pre-wedding Song,7 days Photos,Candid Cinematography,2x 30-page Album,All videos edited,Reels" class="btn btn-warning rounded-pill fw-bold">BOOK NOW</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Package Banner Section -->
+    <section class="custom-package-banner py-5">
+        <div class="container-fluid px-0">
+            <div class="banner-wrapper">
+                <div class="banner-content text-center text-white">
+                    <h2 class="banner-title">Custom Package</h2>
+                    <p class="banner-subtitle">Build your perfect photography experience.</p>
+                    <a href="/custom-package" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold mt-3">Custom Package</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section py-5">
+        <div class="container-fluid px-0">
+            <!-- Section Heading -->
+            <div class="text-center mb-5">
+                <h2 class="gallery-heading">What Our Clients Say</h2>
+                <div class="heading-underline"></div>
+                <p class="mt-3 text-gold" style="color: var(--gold); font-family: 'Poppins', sans-serif; letter-spacing: 1px;">Real experiences from our valued customers</p>
+            </div>
+
+            <!-- Row 1: Scrolling Left to Right -->
+            <div class="testimonial-scroll-container">
+                <div class="testimonial-track track-right">
+                    <% if (typeof feedbacks !== 'undefined' && feedbacks && feedbacks.length > 0) { %>
+                        <% feedbacks.forEach(feedback => { %>
+                            <div class="testimonial-card">
+                                <div class="stars">
+                                    <% for(let i=0; i<5; i++) { %>
+                                        <i class="bi bi-star-fill <%= i < feedback.rating ? 'text-warning' : 'text-muted' %>"></i>
+                                    <% } %>
+                                </div>
+                                <h4 class="client-name"><%= feedback.name %></h4>
+                                <span class="package-tag"><%= feedback.packageName %></span>
+                                <p class="feedback-text">"<%= feedback.experience %>"</p>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <!-- Static feedbacks if no data from DB -->
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                            <h4 class="client-name">Rahul Sharma</h4>
+                            <span class="package-tag">Wedding Package</span>
+                            <p class="feedback-text">"Amazing experience! The team captured every emotion perfectly. Highly professional and creative."</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                            <h4 class="client-name">Priya Verma</h4>
+                            <span class="package-tag">Pre-Wedding Shoot</span>
+                            <p class="feedback-text">"Loved the creativity and the locations suggested. The final shots were beyond our expectations!"</p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Row 2: Scrolling Right to Left (Optional, or just use one row for DB data) -->
+            <% if (typeof feedbacks !== 'undefined' && feedbacks && feedbacks.length > 3) { %>
+            <div class="testimonial-scroll-container mt-4">
+                <div class="testimonial-track track-left">
+                    <% feedbacks.slice().reverse().forEach(feedback => { %>
+                        <div class="testimonial-card">
+                            <div class="stars">
+                                <% for(let i=0; i<5; i++) { %>
+                                    <i class="bi bi-star-fill <%= i < feedback.rating ? 'text-warning' : 'text-muted' %>"></i>
+                                <% } %>
+                            </div>
+                            <h4 class="client-name"><%= feedback.name %></h4>
+                            <span class="package-tag"><%= feedback.packageName %></span>
+                            <p class="feedback-text">"<%= feedback.experience %>"</p>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+            <% } %>
+
+            <!-- Feedback Button Section -->
+            <div class="text-center mt-5">
+                <h3 class="text-white mb-3">Loved our work? Share your experience!</h3>
+                <a href="/feedback" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold" style="background-color: var(--gold); border-color: var(--gold);">Give Feedback</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Partial -->
+    <%- include('../partials/footer') %>
+
+    <!-- Custom Scripts -->
+    <script src="/js/script.js"></script>
+    <script src="/js/footer.js"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

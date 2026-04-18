@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/all.min.css">
+</head>
+<body>
+    <!-- Include Alerts Partial -->
+    <%- include('../partials/alerts') %>
+
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="<%= cloudinaryBaseUrl %>login-signup-back-vid1.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="signup-container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="signup-card p-4 p-md-5">
+            <div class="brand-logo mb-4 text-center">
+                <h1 class="cinzel-font">UTSAVA CLICK</h1>
+            </div>
+            <h2 class="text-center mb-4 poppins-font text-gold">Join Us Today</h2>
+            <form action="/register" method="POST" id="signupForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label poppins-font text-white">Full Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-gold">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3z"/>
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                        </span>
+                        <input type="text" name="name" class="form-control bg-transparent border-gold text-white" id="name" placeholder="Enter your name" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label poppins-font text-white">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-gold">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v.217l-8 4.8-8-4.8V4z"/>
+                                <path d="M0 6.383l7.555 4.533a.5.5 0 0 0 .89 0L16 6.383V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6.383z"/>
+                            </svg>
+                        </span>
+                        <input type="email" name="email" class="form-control bg-transparent border-gold text-white" id="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label poppins-font text-white">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-transparent border-gold">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
+                                <path d="M2.5 8V6a5.5 5.5 0 1 1 11 0v2h.5A1.5 1.5 0 0 1 15.5 9.5v5A1.5 1.5 0 0 1 14 16H2A1.5 1.5 0 0 1 .5 14.5v-5A1.5 1.5 0 0 1 2 8h.5zM4 8V6a4 4 0 1 1 8 0v2H4z"/>
+                            </svg>
+                        </span>
+                        <input type="password" name="password" class="form-control bg-transparent border-gold text-white" id="password" placeholder="Create a password" required>
+                        <button type="button" class="toggle-password" data-target="#password" aria-label="Toggle password visibility" title="Show/Hide password">
+                            <i class="fas fa-eye icon-eye"></i>
+                            <i class="fas fa-eye-slash icon-eye-slash d-none"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-gold poppins-font fw-bold">SIGN UP</button>
+                </div>
+                <div class="text-center">
+                    <p class="poppins-font text-white-50">Already have an account? <a href="/login" class="text-gold text-decoration-none">Login</a></p>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="/" class="text-white-50 text-decoration-none poppins-font"><i class="fas fa-arrow-left me-2"></i>Back to Home</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/js/signup.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+/* public/css/nav.css */
+
+:root {
+    --gold: #d4af37;
+    --dark-gold: #b8860b;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+/* Navbar Container */
+.navbar {
+    transition: all 0.4s ease-in-out;
+    padding: 1.2rem 0;
+    z-index: 1000;
+}
+
+/* Scrolled Navbar state */
+.navbar-scrolled {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+    backdrop-filter: blur(10px);
+    padding: 0.8rem 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Brand Logo */
+.navbar-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white) !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: var(--gold) !important;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* Nav Links */
+.nav-link {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--white) !important;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    margin: 0 18px;
+}
+
+.nav-link i {
+    font-size: 1.4rem;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--gold) !important;
+}
+
+.small-link {
+    font-size: 0.8rem;
+    margin: 0 8px;
+}
+
+/* Dropdown Styling */
+.dropdown-menu {
+    border-radius: 8px;
+    padding: 10px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin-top: 15px !important;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    animation: fadeIn 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.95) !important;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    color: var(--white) !important;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(212, 175, 55, 0.1) !important;
+    color: var(--gold) !important;
+}
+
+/* Notification Specific */
+.notification-dropdown {
+    width: 320px;
+}
+
+.border-gold {
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+.text-gold {
+    color: var(--gold) !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .navbar {
+        padding: 0.8rem 0;
+        background-color: rgba(0, 0, 0, 0.9) !important;
+        overflow: visible !important; /* Prevent clipping of dropdowns */
+    }
+
+    .navbar > .container {
+        overflow: visible !important;
+    }
+
+    .order-lg-last {
+        z-index: 1001; /* Ensure icons stay above the collapsed menu */
+        position: relative;
+    }
+
+    .navbar-collapse {
+        background-color: rgba(0, 0, 0, 0.98);
+        border-radius: 12px;
+        padding: 25px;
+        margin-top: 15px;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        z-index: 999; /* Below the icons */
+    }
+
+    .navbar-nav {
+        align-items: center !important;
+    }
+
+    .nav-link {
+        margin: 10px 0;
+        font-size: 1.2rem;
+        padding: 8px 0;
+    }
+
+    .dropdown-menu {
+        background-color: rgba(0, 0, 0, 0.98) !important;
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8) !important;
+        margin-top: 10px !important;
+        padding: 10px 0;
+        text-align: left;
+        position: absolute !important; /* Force absolute positioning for always-visible icons */
+        right: 0;
+        left: auto !important; /* Ensure it aligns to the right */
+        z-index: 2000 !important; /* Highest priority */
+        float: none;
+    }
+
+    /* Keep dropdowns relative to their icon container on mobile */
+    .dropdown {
+        position: relative !important;
+    }
+
+    .notification-dropdown {
+        width: 90% !important;
+        max-width: 350px;
+        max-height: 70vh;
+        overflow-y: auto;
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        margin: 0 !important;
+        z-index: 2050 !important;
+        border-radius: 15px;
+    }
+
+    /* Notification Overlay Backdrop */
+    .notification-open-body {
+        overflow: hidden;
+    }
+
+    .notification-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        z-index: 2040;
+        display: none;
+    }
+
+    .notification-dropdown.show ~ .notification-backdrop {
+        display: block;
+    }
+
+    .dropdown-item {
+        padding: 12px 20px;
+        font-size: 1rem;
+        white-space: normal; /* Allow text wrapping in notifications */
+    }
+
+    .guest-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    /* Ensure icons don't get too small */
+    .bi-bell, .bi-person-circle {
+        font-size: 1.8rem !important;
+    }
+}
+
+/* Small devices (mobile) */
+@media (max-width: 575.98px) {
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+
+    .navbar-collapse {
+        padding: 20px;
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+    }
+}

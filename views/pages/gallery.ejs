@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Google Fonts: Cinzel, Playfair Display, Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/gallery.css">
+</head>
+<body>
+
+    <!-- Include Navbar Partial -->
+    <%- include('../partials/nav') %>
+
+    <section id="gallery-page">
+        <div class="container">
+            <div class="gallery-header">
+                <h1>Our Masterpieces</h1>
+                <div class="heading-underline"></div>
+                <p>Capturing Best Moments, Creating Good Memories</p>
+            </div>
+
+            <div class="gallery-grid">
+                <% if (images && images.length > 0) { %>
+                    <% images.forEach(image => { %>
+                        <div class="gallery-card">
+                            <img src="<%= cloudinaryBaseUrl %>gallarysection/<%= image %>" alt="Gallery Image" loading="lazy">
+                            <div class="overlay">
+                                <i class="bi bi-zoom-in"></i>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <div class="text-center w-100 py-5">
+                        <h3 class="text-gold">No images found in the gallery.</h3>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span id="lightboxClose" class="lightbox-close">&times;</span>
+            <img id="lightboxImg" src="" alt="Full Screen Preview" class="lightbox-img">
+        </div>
+    </div>
+
+    <!-- Footer Partial -->
+    <%- include('../partials/footer') %>
+
+    <!-- Custom Scripts -->
+    <script src="/js/script.js"></script>
+    <script src="/js/footer.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/gallery.js"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

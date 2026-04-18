@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <!-- Google Fonts: Cinzel, Playfair Display, Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/customPackage.css">
+</head>
+<body>
+
+    <!-- Include Navbar Partial -->
+    <%- include('../partials/nav') %>
+
+    <!-- Include Alerts Partial -->
+    <%- include('../partials/alerts') %>
+
+    <section id="custom-package-builder">
+        <div class="container">
+            <div class="builder-header">
+                <h1>Build Your Custom Package</h1>
+                <p>Select the services you need and create your perfect photography experience</p>
+            </div>
+
+            <div class="builder-container">
+                <!-- Left Section: Service Selection -->
+                <div class="services-section">
+                    <div id="servicesGrid" class="services-grid">
+                        <!-- Services will be rendered here by JS -->
+                        <div class="text-center w-100 py-5">
+                            <div class="spinner-border text-gold" role="status">
+                                <span class="visually-hidden">Loading services...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Section: Selected Package Summary -->
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h2 class="summary-title">Package Summary</h2>
+                        
+                        <!-- Number of Days Selection -->
+                        <div class="days-selector mb-4">
+                            <label class="form-label d-block mb-2">Number of Days</label>
+                            <div class="input-group">
+                                <button class="btn btn-outline-gold" type="button" id="decreaseDays">-</button>
+                                <input type="number" id="numDays" class="form-control text-center bg-transparent text-white border-gold" value="1" min="1" readonly>
+                                <button class="btn btn-outline-gold" type="button" id="increaseDays">+</button>
+                            </div>
+                        </div>
+                        
+                        <ul id="selectedItemsList" class="selected-items-list">
+                            <!-- Selected items will appear here -->
+                            <div class="empty-message">No services selected yet</div>
+                        </ul>
+
+                        <div class="total-section">
+                            <div class="total-row">
+                                <span class="total-label">Estimated Total</span>
+                                <span id="totalAmount" class="total-amount">₹ 0</span>
+                            </div>
+                            <button id="proceedBtn" class="btn btn-proceed" disabled>
+                                Proceed to Booking
+                            </button>
+                        </div>
+                        
+                        <p class="text-center mt-3 builder-info-text">
+                            <i class="bi bi-info-circle me-1"></i> Final pricing may vary based on event duration and location.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Partial -->
+    <%- include('../partials/footer') %>
+
+    <!-- Custom Scripts -->
+    <script src="/js/script.js"></script>
+    <script src="/js/footer.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/customPackage.js"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

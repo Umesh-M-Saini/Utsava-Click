@@ -1,0 +1,221 @@
+/* public/css/booking.css */
+
+:root {
+    --gold: #d4af37;
+    --dark-gold: #b8860b;
+    --white: #ffffff;
+    --black: #111111;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(212, 175, 55, 0.3);
+}
+
+.booking-page {
+    padding: 140px 0 80px;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/home-img7.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--white);
+}
+
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* Left Section: Summary */
+.summary-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.gold-line {
+    border-top: 2px solid var(--gold);
+    opacity: 0.5;
+    margin-bottom: 25px;
+}
+
+.summary-item label {
+    display: block;
+    color: var(--gold);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.summary-item p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.bg-gold-outline {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-weight: 400;
+    padding: 8px 15px;
+    border-radius: 50px;
+}
+
+.total-price {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    color: var(--gold);
+    font-size: 2.5rem;
+}
+
+.booking-info-box {
+    background: rgba(212, 175, 55, 0.1);
+    border-left: 4px solid var(--gold);
+    padding: 15px;
+    font-size: 0.9rem;
+}
+
+/* Right Section: Form */
+.form-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.form-subtitle {
+    color: #ccc;
+    margin-bottom: 35px;
+}
+
+.form-label {
+    color: var(--gold);
+    font-weight: 500;
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    padding: 12px 15px;
+    border-radius: 10px;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    color: var(--white);
+}
+
+.is-invalid-custom {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.3) !important;
+}
+
+#dateError {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-booking-submit {
+    background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+    color: var(--black);
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.4s ease;
+    margin-top: 20px;
+}
+
+.btn-booking-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+    color: var(--black);
+}
+
+/* Manual Package Selection UI */
+.package-options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.package-option-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.package-option-item:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--gold);
+    transform: translateX(5px);
+}
+
+.package-option-item.selected {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.option-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.option-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--gold);
+}
+
+.option-price {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.package-option-item.custom {
+    border-style: dashed;
+}
+
+.text-soft-white {
+    color: #ccc;
+}
+
+.is-invalid-custom {
+    border-color: #ff4d4d !important;
+    background: rgba(255, 77, 77, 0.05) !important;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .summary-card {
+        margin-bottom: 30px;
+    }
+}
