@@ -54,7 +54,7 @@ app.use(async (req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.user = req.session.user || null;
-    res.locals.cloudinaryBaseUrl = process.env.CLOUDINARY_URL || "https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/"; 
+    res.locals.cloudinaryBaseUrl = process.env.CLOUDINARY_URL || "https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/";
 
     // ✅ Default values for templates
     res.locals.unreadCount = 0;
@@ -70,24 +70,30 @@ app.use(async (req, res, next) => {
     }
 
     // Notifications & unread count
+    // Notifications & unread count (FIXED)
     if (req.session.user) {
         try {
-            const notifications = await Notification.find({ userId: req.session.user.id }).limit(5);
+            const userId = req.session.user.id.toString();  // 🔥 IMPORTANT FIX
+
+            const notifications = await Notification.find({ userId })
+                .sort({ createdAt: -1 })
+                .limit(5);
+
             res.locals.notifications = notifications;
-            
-            // ✅ Count unread notifications
-            const count = await Notification.countDocuments({ 
-                userId: req.session.user.id, 
-                isRead: false 
+
+            const count = await Notification.countDocuments({
+                userId,
+                isRead: false
             });
+
             res.locals.unreadCount = count;
+
         } catch (err) {
             console.log("Notification error:", err);
             res.locals.notifications = [];
             res.locals.unreadCount = 0;
         }
     }
-    next();
 });
 
 // Routesa

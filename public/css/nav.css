@@ -94,6 +94,38 @@
     width: 320px;
 }
 
+.notification-item {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.notification-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.delete-notif-btn {
+    opacity: 0.4;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+}
+
+.notification-item:hover .delete-notif-btn {
+    opacity: 1;
+}
+
+.delete-notif-btn:hover {
+    transform: scale(1.2);
+    color: #ff4d4d !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .border-gold {
     border-color: rgba(212, 175, 55, 0.3) !important;
 }

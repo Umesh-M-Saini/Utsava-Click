@@ -25,9 +25,10 @@ router.get('/booking/approve/:id', bookingController.approveBooking);
 router.get('/booking/reject/:id', bookingController.rejectBooking);
 
 /**
- * NOTIFICATION READ
+ * NOTIFICATION READ & DELETE
  */
 router.post('/notifications/read/:id', isLoggedIn, bookingController.markNotificationRead);
+router.delete('/notifications/:id', isLoggedIn, bookingController.deleteNotification);
 
 /**
  * CUSTOM PACKAGE
