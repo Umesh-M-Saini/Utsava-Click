@@ -114,7 +114,8 @@ exports.approveBooking = async (req, res) => {
     try {
         const bookingId = req.params.id;
 
-        if (!bookingId) {
+        // ✅ VALIDATION FIX (VERY IMPORTANT)
+        if (!bookingId || bookingId.length < 10) {
             return res.status(400).send("Invalid booking ID ❌");
         }
 
@@ -128,22 +129,24 @@ exports.approveBooking = async (req, res) => {
             return res.send("Already processed ❌");
         }
 
-        // ✅ Update status
         booking.status = "approved";
         await booking.save();
 
-        // ✅ Send email
         await sendApprovalToUser(booking);
 
-        // ✅ SAVE NOTIFICATION (FIXED)
-        await Notification.create({
-            userId: booking.userId.toString(),   // 🔥 IMPORTANT FIX
-            message: "🎉 Your booking is approved! We will contact you soon.",
-            type: "success",
-            isRead: false
-        });
-
-        console.log("✅ APPROVED:", booking._id);
+        // ✅ Notification Logic (Refined)
+        try {
+            const notification = await Notification.create({
+                userId: booking.userId,
+                message: "🎉 Congratulations! Your booking has been approved. We will contact you soon with further details.",
+                type: "success",
+                isRead: false
+            });
+            console.log("✅ Approval notification created for user:", booking.userId, "Notification ID:", notification._id);
+        } catch (notifError) {
+            console.error("❌ Failed to create approval notification:", notifError);
+            // We don't return here because the booking itself was already approved in the DB
+        }
 
         return res.send("<h2 style='color:green'>Booking Approved ✅</h2>");
 
@@ -153,8 +156,6 @@ exports.approveBooking = async (req, res) => {
     }
 };
 
-
-
 /**
  * Reject Booking
  * Route: GET /booking/reject/:id
@@ -163,7 +164,8 @@ exports.rejectBooking = async (req, res) => {
     try {
         const bookingId = req.params.id;
 
-        if (!bookingId) {
+        // ✅ VALIDATION FIX
+        if (!bookingId || bookingId.length < 10) {
             return res.status(400).send("Invalid booking ID ❌");
         }
 
@@ -177,22 +179,24 @@ exports.rejectBooking = async (req, res) => {
             return res.send("Already processed ❌");
         }
 
-        // ✅ Update status
         booking.status = "rejected";
         await booking.save();
 
-        // ✅ Send email
         await sendRejectionToUser(booking);
 
-        // ✅ SAVE NOTIFICATION (FIXED)
-        await Notification.create({
-            userId: booking.userId.toString(),   // 🔥 IMPORTANT FIX
-            message: "❌ Sorry, your booking could not be confirmed. Please try another date.",
-            type: "warning",
-            isRead: false
-        });
-
-        console.log("❌ REJECTED:", booking._id);
+        // ✅ Notification Logic (Refined)
+        try {
+            const notification = await Notification.create({
+                userId: booking.userId,
+                message: "❌ We’re sorry! Your booking request could not be accepted at this time. Please try again or contact us for more details.",
+                type: "warning",
+                isRead: false
+            });
+            console.log("❌ Rejection notification created for user:", booking.userId, "Notification ID:", notification._id);
+        } catch (notifError) {
+            console.error("❌ Failed to create rejection notification:", notifError);
+            // We don't return here because the booking itself was already rejected in the DB
+        }
 
         return res.send("<h2 style='color:red'>Booking Rejected ❌</h2>");
 
@@ -212,24 +216,6 @@ exports.markNotificationRead = async (req, res) => {
         res.json({ success: true });
     } catch (error) {
         res.status(500).json({ success: false });
-    }
-};
-
-/**
- * Delete Notification
- * Route: DELETE /notifications/:id
- */
-exports.deleteNotification = async (req, res) => {
-    try {
-        const result = await Notification.findByIdAndDelete(req.params.id);
-        if (result) {
-            res.json({ success: true, message: 'Notification deleted' });
-        } else {
-            res.status(404).json({ success: false, message: 'Notification not found' });
-        }
-    } catch (error) {
-        console.error('Delete Notification Error:', error);
-        res.status(500).json({ success: false, message: 'Server error' });
     }
 };
 
