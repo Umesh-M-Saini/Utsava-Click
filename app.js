@@ -96,10 +96,10 @@ const authRoutes = require('./routes/auth');
 const bookingRoutes = require('./routes/booking');
 const feedbackRoutes = require('./routes/feedback');
 
-app.use('/', userRoutes);
-app.use('/', authRoutes);
-app.use('/', bookingRoutes);
-app.use('/', feedbackRoutes);
+app.use('/', require('./routes/userRoutes'));
+app.use('/', require('./routes/auth'));
+app.use('/', require('./routes/booking'));
+app.use('/', require('./routes/feedback'));
 
 // 404 handler (Move to bottom)
 app.use((req, res) => {

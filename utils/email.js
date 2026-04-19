@@ -27,6 +27,9 @@ const sendBookingToOwner = async (booking) => {
         const approveLink = `${cleanBaseUrl}/booking/approve/${booking._id}`;
         const rejectLink = `${cleanBaseUrl}/booking/reject/${booking._id}`;
 
+        console.log("APPROVE LINK:", approveLink);
+        console.log("REJECT LINK:", rejectLink);
+
         const servicesList = Array.isArray(booking.services) && booking.services.length > 0
             ? booking.services.join(', ')
             : 'No services specified';
@@ -55,7 +58,7 @@ const sendBookingToOwner = async (booking) => {
                         <p><strong>Email:</strong> ${booking.email || 'N/A'}</p>
                         <p><strong>Phone:</strong> ${booking.phone || 'N/A'}</p>
                         <p><strong>Package:</strong> ${booking.packageName || 'Custom'}</p>
-                        p><strong>Start Date:</strong> ${booking.startDate || 'N/A'}</p>
+                        <p><strong>Start Date:</strong> ${booking.startDate || 'N/A'}</p>
                         <p><strong>End Date:</strong> ${booking.endDate || 'Custom'}</p>
                         <p><strong>Services:</strong> ${servicesList}</p>
                         <p><strong>Price:</strong> ₹${booking.totalPrice || 0}</p>
