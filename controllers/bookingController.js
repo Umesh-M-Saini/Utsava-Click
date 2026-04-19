@@ -138,7 +138,7 @@ exports.approveBooking = async (req, res) => {
         try {
             const notification = await Notification.create({
                 userId: booking.userId,
-                message: `Your booking for ${booking.packageName || 'Custom Package'} has been approved! ✅`,
+                message: "🎉 Congratulations! Your booking has been approved. We will contact you soon with further details.",
                 type: "success",
                 isRead: false
             });
@@ -188,7 +188,7 @@ exports.rejectBooking = async (req, res) => {
         try {
             const notification = await Notification.create({
                 userId: booking.userId,
-                message: `Your booking for ${booking.packageName || 'Custom Package'} has been rejected. ❌`,
+                message: "❌ We’re sorry! Your booking request could not be accepted at this time. Please try again or contact us for more details.",
                 type: "warning",
                 isRead: false
             });
