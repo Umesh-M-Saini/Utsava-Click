@@ -91,7 +91,7 @@ exports.postBooking = async (req, res) => {
         // Create notification for user
         const notification = new Notification({
             userId: req.session.user.id,
-            message: "Your booking request has been submitted! We will contact you soon.",
+            message: ` ${booking.name}! Your booking for "${booking.packageName}" has been subbmited. We will contact you soon.`,
             type: 'success'
         });
         await notification.save();
@@ -137,8 +137,8 @@ exports.approveBooking = async (req, res) => {
         // ✅ Notification Logic (Refined)
         try {
             const notification = await Notification.create({
-                userId: booking.userId,
-                message: "🎉 Congratulations! Your booking has been approved. We will contact you soon with further details.",
+                userId: req.session.user._id,
+                message: `🎉 Great news, ${booking.name}! Your booking for "${booking.packageName}" has been approved. We will contact you soon.`,
                 type: "success",
                 isRead: false
             });
@@ -187,8 +187,8 @@ exports.rejectBooking = async (req, res) => {
         // ✅ Notification Logic (Refined)
         try {
             const notification = await Notification.create({
-                userId: booking.userId,
-                message: "❌ We’re sorry! Your booking request could not be accepted at this time. Please try again or contact us for more details.",
+                userId: req.session.user._id,
+               message: `❌ Hello ${booking.name}, your booking for "${booking.packageName}" could not be approved. Please try again or contact us.`,
                 type: "warning",
                 isRead: false
             });

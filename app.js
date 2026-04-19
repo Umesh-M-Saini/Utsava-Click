@@ -46,7 +46,10 @@ app.use(session({
 app.use(flash());
 
 // Models
-const Notification = require('./models/Notification');
+const notifications = await Notification
+    .find({ userId: req.session.user._id })
+    .sort({ createdAt: -1 })
+    .limit(5);
 const Feedback = require('./models/Feedback');
 
 // Global Middleware (Set res.locals before routes)
