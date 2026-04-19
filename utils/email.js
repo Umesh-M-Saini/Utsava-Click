@@ -19,7 +19,7 @@ const sendBookingToOwner = async (booking) => {
             return { success: false, messageId: null, error: 'SendGrid not configured' };
         }
 
-        const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+        const BASE_URL = process.env.BASE_URL || 'https://utsava-click-production.up.railway.app';
         
         // Ensure BASE_URL doesn't end with a slash for consistency
         const cleanBaseUrl = BASE_URL.endsWith('/') ? BASE_URL.slice(0, -1) : BASE_URL;
@@ -55,6 +55,8 @@ const sendBookingToOwner = async (booking) => {
                         <p><strong>Email:</strong> ${booking.email || 'N/A'}</p>
                         <p><strong>Phone:</strong> ${booking.phone || 'N/A'}</p>
                         <p><strong>Package:</strong> ${booking.packageName || 'Custom'}</p>
+                        p><strong>Phone:</strong> ${booking.startDate || 'N/A'}</p>
+                        <p><strong>Package:</strong> ${booking.endDate || 'Custom'}</p>
                         <p><strong>Services:</strong> ${servicesList}</p>
                         <p><strong>Price:</strong> ₹${booking.totalPrice || 0}</p>
                         <p><strong>Location:</strong> ${booking.place || 'N/A'}</p>
