@@ -55,8 +55,8 @@ const sendBookingToOwner = async (booking) => {
                         <p><strong>Email:</strong> ${booking.email || 'N/A'}</p>
                         <p><strong>Phone:</strong> ${booking.phone || 'N/A'}</p>
                         <p><strong>Package:</strong> ${booking.packageName || 'Custom'}</p>
-                        p><strong>Phone:</strong> ${booking.startDate || 'N/A'}</p>
-                        <p><strong>Package:</strong> ${booking.endDate || 'Custom'}</p>
+                        p><strong>Start Date:</strong> ${booking.startDate || 'N/A'}</p>
+                        <p><strong>End Date:</strong> ${booking.endDate || 'Custom'}</p>
                         <p><strong>Services:</strong> ${servicesList}</p>
                         <p><strong>Price:</strong> ₹${booking.totalPrice || 0}</p>
                         <p><strong>Location:</strong> ${booking.place || 'N/A'}</p>

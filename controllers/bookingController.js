@@ -134,12 +134,19 @@ exports.approveBooking = async (req, res) => {
 
         await sendApprovalToUser(booking);
 
-        await Notification.create({
-            userId: booking.userId,
-            message: `Your booking for ${booking.packageName} is approved ✅`,
-            type: "success",
-            isRead: false
-        });
+        // ✅ Notification Logic (Refined)
+        try {
+            const notification = await Notification.create({
+                userId: booking.userId,
+                message: `Your booking for ${booking.packageName || 'Custom Package'} has been approved! ✅`,
+                type: "success",
+                isRead: false
+            });
+            console.log("✅ Approval notification created for user:", booking.userId, "Notification ID:", notification._id);
+        } catch (notifError) {
+            console.error("❌ Failed to create approval notification:", notifError);
+            // We don't return here because the booking itself was already approved in the DB
+        }
 
         return res.send("<h2 style='color:green'>Booking Approved ✅</h2>");
 
@@ -177,12 +184,19 @@ exports.rejectBooking = async (req, res) => {
 
         await sendRejectionToUser(booking);
 
-        await Notification.create({
-            userId: booking.userId,
-            message: `Your booking for ${booking.packageName} is rejected ❌`,
-            type: "warning",
-            isRead: false
-        });
+        // ✅ Notification Logic (Refined)
+        try {
+            const notification = await Notification.create({
+                userId: booking.userId,
+                message: `Your booking for ${booking.packageName || 'Custom Package'} has been rejected. ❌`,
+                type: "warning",
+                isRead: false
+            });
+            console.log("❌ Rejection notification created for user:", booking.userId, "Notification ID:", notification._id);
+        } catch (notifError) {
+            console.error("❌ Failed to create rejection notification:", notifError);
+            // We don't return here because the booking itself was already rejected in the DB
+        }
 
         return res.send("<h2 style='color:red'>Booking Rejected ❌</h2>");
 

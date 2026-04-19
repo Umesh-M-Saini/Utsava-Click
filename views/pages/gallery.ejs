@@ -33,7 +33,7 @@
                 <% if (images && images.length > 0) { %>
                     <% images.forEach(image => { %>
                         <div class="gallery-card">
-                            <img src="<%= cloudinaryBaseUrl %>gallarysection/<%= image %>" alt="Gallery Image" loading="lazy">
+                            <img src="<%= image %>" alt="Gallery Image" loading="lazy">
                             <div class="overlay">
                                 <i class="bi bi-zoom-in"></i>
                             </div>
