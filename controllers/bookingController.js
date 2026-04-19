@@ -229,6 +229,32 @@ exports.getCustomPackagePage = (req, res) => {
     });
 };
 
+
+/**
+ * Delete Notification
+ * Route: DELETE /notifications/:id
+ */
+exports.deleteNotification = async (req, res) => {
+    try {
+        const notifId = req.params.id;
+
+        if (!notifId) {
+            return res.status(400).json({ success: false, message: "Invalid ID ❌" });
+        }
+
+        await Notification.findByIdAndDelete(notifId);
+
+        console.log("🗑️ Notification deleted:", notifId);
+
+        res.json({ success: true });
+
+    } catch (error) {
+        console.error("❌ Delete Notification Error:", error);
+        res.status(500).json({ success: false });
+    }
+};
+
+
 /**
  * Handle Custom Package Request
  * Route: POST /custom-package
