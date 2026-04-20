@@ -46,56 +46,53 @@ app.use(session({
 app.use(flash());
 
 // Models
-const notifications = await Notification
-    .find({ userId: req.session.user._id })
-    .sort({ createdAt: -1 })
-    .limit(5);
+const Notification = require('./models/Notification');
 const Feedback = require('./models/Feedback');
 
 // Global Middleware (Set res.locals before routes)
 app.use(async (req, res, next) => {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.user = req.session.user || null;
-    res.locals.cloudinaryBaseUrl = process.env.CLOUDINARY_URL || "https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/";
-
-    // ✅ Default values for templates
-    res.locals.unreadCount = 0;
-    res.locals.notifications = [];
-
-    // Feedbacks
     try {
-        const feedbacks = await Feedback.find().sort({ createdAt: -1 }).limit(10);
-        res.locals.feedbacks = feedbacks || [];
-    } catch (err) {
-        console.log("Feedback error:", err);
+        res.locals.success_msg = req.flash('success_msg');
+        res.locals.error_msg = req.flash('error_msg');
+        res.locals.user = req.session.user || null;
+        res.locals.cloudinaryBaseUrl = process.env.CLOUDINARY_URL || "https://res.cloudinary.com/dwyfclm8v/image/upload/v1713340000/utsava-click/";
+
+        // ✅ Default values for templates
+        res.locals.unreadCount = 0;
+        res.locals.notifications = [];
         res.locals.feedbacks = [];
-    }
 
-    // Notifications & unread count
-    // Notifications & unread count (FIXED)
-    if (req.session.user) {
+        // Fetch Global Feedbacks (Limit to 10 for performance)
         try {
-            const userId = req.session.user.id.toString();  // 🔥 IMPORTANT FIX
-
-            const notifications = await Notification.find({ userId })
-                .sort({ createdAt: -1 })
-                .limit(5);
-
-            res.locals.notifications = notifications;
-
-            const count = await Notification.countDocuments({
-                userId,
-                isRead: false
-            });
-
-            res.locals.unreadCount = count;
-
+            const feedbacks = await Feedback.find().sort({ createdAt: -1 }).limit(10);
+            res.locals.feedbacks = feedbacks || [];
         } catch (err) {
-            console.log("Notification error:", err);
-            res.locals.notifications = [];
-            res.locals.unreadCount = 0;
+            console.error("❌ Feedback fetching error:", err);
         }
+
+        // Fetch User-Specific Notifications
+        if (req.session && req.session.user) {
+            try {
+                const userId = req.session.user.id || req.session.user._id; // Handle both id formats
+                if (userId) {
+                    const [notifications, unreadCount] = await Promise.all([
+                        Notification.find({ userId: userId.toString() }).sort({ createdAt: -1 }).limit(5),
+                        Notification.countDocuments({ userId: userId.toString(), isRead: false })
+                    ]);
+
+                    res.locals.notifications = notifications || [];
+                    res.locals.unreadCount = unreadCount || 0;
+                    console.log(`🔔 Notifications fetched for user: ${userId}`);
+                }
+            } catch (err) {
+                console.error("❌ Notification fetching error:", err);
+            }
+        }
+        
+        next(); // 🔥 CRITICAL: Move to next middleware/route
+    } catch (error) {
+        console.error("❌ Global Middleware Error:", error);
+        next(); // Ensure request continues even if middleware fails
     }
 });
 
@@ -115,12 +112,25 @@ app.use((req, res) => {
     res.status(404).render('pages/404', { title: '404 - Page Not Found' });
 });
 
-// ✅ CONNECT DB (SAFE)
-connectDB()
-    .then(() => console.log("MongoDB Connected"))
-    .catch(err => console.log("Mongo Error:", err));
+// ✅ DATABASE & SERVER STARTUP (SAFE ASYNC)
+const startServer = async () => {
+    try {
+        console.log("⏳ Starting server setup...");
+        
+        // Connect to MongoDB
+        await connectDB();
+        console.log("✅ MongoDB Connection Established");
 
-// ✅ START SERVER (ALWAYS RUN)
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-});
+        // Start listening
+        app.listen(PORT, () => {
+            console.log(`🚀 Server successfully running on port ${PORT}`);
+        });
+        
+    } catch (error) {
+        console.error("❌ CRITICAL: Server failed to start:", error);
+        process.exit(1); // Exit with failure
+    }
+};
+
+// Execute Startup
+startServer();

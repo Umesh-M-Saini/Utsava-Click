@@ -91,10 +91,11 @@ exports.postBooking = async (req, res) => {
         // Create notification for user
         const notification = new Notification({
             userId: req.session.user.id,
-            message: ` ${booking.name}! Your booking for "${booking.packageName}" has been subbmited. We will contact you soon.`,
+            message: `Hello ${newBooking.name}! Your booking for "${newBooking.packageName}" has been submitted successfully. We will contact you soon.`,
             type: 'success'
         });
         await notification.save();
+        console.log(`🔔 Notification created for new booking: ${newBooking._id}`);
 
         req.flash('success_msg', 'Booking request submitted successfully! 🎉');
         res.redirect('/');
