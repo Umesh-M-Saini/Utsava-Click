@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Redirect with query params for the new booking system
         const servicesParam = encodeURIComponent(packageData.services.join(','));
-        window.location.href = `/booking?services=${servicesParam}&total=${totalPrice}`;
+        window.location.href = `/booking?services=${servicesParam}&total=${totalPrice}&numDays=${numDays}`;
     });
 
     // Initialize

@@ -4,14 +4,20 @@
 const PACKAGE_DAYS = {
     'Basic Package': 3,
     'First Package': 3,
-    'Standard Package': 2,
-    'Second Package': 2,
+    'Standard Package': 5,
+    'Second Package': 5,
     'Premium Package': 7,
     'Third Package': 7,
     'Custom Package': null
 };
 
 let currentPackageDays = null;
+
+// Helper function to get query parameters from URL
+function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
 
 // Helper function to calculate end date
 function calculateEndDate(startDateStr, days) {
@@ -83,10 +89,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const dateError = document.getElementById('dateError');
     const hiddenPackageName = document.getElementById('hiddenPackageName');
     
+    // Check for numDays from custom package query param
+    const customNumDays = getQueryParam('numDays');
+    if (customNumDays) {
+        const days = parseInt(customNumDays, 10);
+        if (!isNaN(days) && days > 0) {
+            currentPackageDays = days;
+            console.log('Custom package days from query:', currentPackageDays);
+        }
+    }
+    
     // Set initial current package days from pre-selected package
     if (hiddenPackageName && hiddenPackageName.value) {
-        currentPackageDays = PACKAGE_DAYS[hiddenPackageName.value] || null;
-        console.log('Pre-selected package days:', currentPackageDays);
+        // If we don't have custom days from query, use package days
+        if (!currentPackageDays) {
+            currentPackageDays = PACKAGE_DAYS[hiddenPackageName.value] || null;
+            console.log('Pre-selected package days:', currentPackageDays);
+        }
     }
     
     // Set minimum date to today for both inputs
@@ -119,6 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
         updateEndDate();
     });
     if (endDateInput) endDateInput.addEventListener('change', validateDates);
+    
+    // Auto-update end date on page load if start date and days are available
+    if (startDateInput && startDateInput.value && currentPackageDays) {
+        updateEndDate();
+    }
 
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
